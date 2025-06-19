@@ -27,8 +27,11 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'), // password default untuk semua user dummy
             'remember_token' => Str::random(10),
+            'university' => fake()->randomElement(['Universitas Indonesia', 'Institut Teknologi Bandung', 'Universitas Gadjah Mada', 'Universitas Brawijaya']),
+            'is_verified' => true, // Asumsikan semua user dummy sudah terverifikasi
+            'role' => 'user',
         ];
     }
 
