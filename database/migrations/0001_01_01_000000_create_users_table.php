@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('university')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('student_id_card_path')->nullable()->comment('Path foto KTM');
+            $table->boolean('is_verified')->default(false)->comment('Status verifikasi oleh admin');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
