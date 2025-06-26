@@ -21,4 +21,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::group(["middleware" => "auth"], function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});

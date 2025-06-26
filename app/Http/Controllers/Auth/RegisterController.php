@@ -33,10 +33,14 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $result = $user;
+
+
+        return redirect()->route('login');
         // Login otomatis
-        Auth::login($user);
+        // Auth::login($user);
 
         // Redirect ke home
-        return redirect('/');
+        // return redirect('/');
     }
 }

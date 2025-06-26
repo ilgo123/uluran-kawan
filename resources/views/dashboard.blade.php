@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm">
@@ -21,13 +23,13 @@
                 <div class="flex-shrink-0">
                     <h1 class="text-xl font-semibold text-green-600">Uluran Kawan</h1>
                 </div>
-                
+
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{ route('dashboard') }}" class="text-gray-500 hover:text-green-600 px-3 py-2">Beranda</a>
                     <a href="#" class="text-green-600 font-medium px-3 py-2">Campaigns</a>
                 </nav>
-                
+
                 <!-- User Dropdown -->
                 <div class="relative ml-4">
                     <button id="user-menu" class="flex items-center text-sm rounded-full focus:outline-none">
@@ -36,11 +38,19 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                    
+
                     <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil Saya</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:text-red-800">Logout</a>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="block px-4 py-2 text-sm text-red-700 hover:text-red-800">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
@@ -52,9 +62,9 @@
         <!-- Page Heading -->
         <div class="mb-8">
             <h2 class="text-3xl font-semibold text-gray-800">Dashboard Saya</h2>
-            <p class="text-gray-600 mt-1">Selamat datang kembali, User Test upd!</p>
+            <p class="text-gray-600 mt-1">Selamat datang kembali, {{auth()->user()->name}}</p>
         </div>
-        
+
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="bg-white p-6 rounded-lg shadow">
@@ -66,20 +76,20 @@
                 <p class="text-3xl font-semibold text-gray-800 mt-2">2</p>
             </div>
         </div>
-        
+
         <!-- Create Campaign Button -->
         <div class="mb-6">
             <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg shadow">
                 + Buat Campaign Baru
             </button>
         </div>
-        
+
         <!-- Campaign Table -->
         <div class="bg-white shadow rounded-lg overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-200">
                 <h3 class="text-lg font-medium text-gray-800">Campaign Saya</h3>
             </div>
-            
+
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -91,10 +101,11 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($campaigns as $campaign)
                         <!-- Campaign 1 -->
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="font-medium text-gray-900">Cihuyyy</div>
+                                <div class="font-medium text-gray-900">{{ $campaign->title }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
@@ -104,8 +115,9 @@
                                 <button class="text-green-600 hover:text-green-900 font-medium">Edit</button>
                             </td>
                         </tr>
-                        
-                        <!-- Campaign 2 -->
+                        @endforeach
+
+                        <!-- Campaign 2
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="font-medium text-gray-900">TasTesTis</div>
@@ -118,8 +130,8 @@
                                 <button class="text-green-600 hover:text-green-900 font-medium">Edit</button>
                             </td>
                         </tr>
-                        
-                        <!-- Campaign 3 -->
+
+                        <Campaign 3
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="font-medium text-gray-900">Test update</div>
@@ -131,7 +143,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <button class="text-green-600 hover:text-green-900 font-medium">Edit</button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -158,11 +170,12 @@
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('dropdown-menu');
             const button = document.getElementById('user-menu');
-            
+
             if (!button.contains(event.target) && !dropdown.contains(event.target)) {
                 dropdown.classList.add('hidden');
             }
         });
     </script>
 </body>
+
 </html>
