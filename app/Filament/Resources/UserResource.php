@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\ImageColumn;
+
 
 class UserResource extends Resource
 {
@@ -31,22 +33,30 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('password')
+                //     ->password()
+                //     ->required()
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('university')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\Textarea::make('bio')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('student_id_card_path')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\FileUpload::make('student_id_card_path')
+                    ->image()
+                    ->directory('student-id-cards') // opsional: menentukan folder penyimpanan
+                    ->imageEditor()
+                    ->label('Foto KTM')
+                    ->previewable()
+                    ->downloadable()
+                    ->openable(),
                 Forms\Components\Toggle::make('is_verified')
                     ->required(),
-                Forms\Components\TextInput::make('role')
-                    ->required(),
+                Forms\Components\Select::make('role')
+                    ->options([
+                        'admin' => 'Admin',
+                        'user' => 'User',
+                    ])
             ]);
     }
 
@@ -63,8 +73,11 @@ class UserResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('university')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('student_id_card_path')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('student_id_card_path')
+                    ->label('Foto KTM')
+                    ->width(200)
+                    ->height(200)
+                    ->square(),
                 Tables\Columns\IconColumn::make('is_verified')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('role'),

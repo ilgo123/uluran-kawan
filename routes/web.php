@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KTMUploadController;
+
 
 // Halaman beranda
 Route::get('/', function () {
@@ -22,3 +24,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/upload-ktm', [KTMUploadController::class, 'showForm'])->name('ktm.form');
+    Route::post('/upload-ktm', [KTMUploadController::class, 'submitForm'])->name('ktm.submit');
+});
