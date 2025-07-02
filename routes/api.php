@@ -12,4 +12,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/upload-ktm', [UserVerificationController::class, 'uploadKTM']);
 });
 
-// Route::post('/user/upload-ktm', [UserVerificationController::class, 'uploadKTM']);
+Route::post('/user/upload-ktm', [UserVerificationController::class, 'uploadKTM']);
