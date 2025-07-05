@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +10,21 @@ class Campaign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'category_id', 'title', 'slug', 'description', 'type',
-        'target_amount', 'current_amount', 'item_name', 'image_path',
-        'status', 'deadline',
-        'is_success_story', 'type', 'item_name'
+        'user_id',
+        'category_id',
+        'title',
+        'slug',
+        'description',
+        'type',
+        'target_amount',
+        'current_amount',
+        'item_name',
+        'image_path',
+        'status',
+        'deadline',
+        'is_success_story',
+        'type',
+        'item_name'
     ];
 
     protected $casts = [

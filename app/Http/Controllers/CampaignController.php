@@ -9,6 +9,30 @@ use Illuminate\Http\JsonResponse;
 
 class CampaignController extends Controller
 {
+    public function home()
+    {
+        $campaigns = Campaign::orderBy('created_at', 'desc')->take(6)->get();
+        return view('campaigns.home', compact('campaigns'));
+    }
+
+    public function explore()
+    {
+        $allCampaigns = Campaign::orderBy('created_at', 'desc')->get();
+
+        $categories = [
+            'Semua',
+            'Biaya Pendidikan',
+            'Buku & Alat Belajar',
+            'Pendidikan & Seragam',
+            'Biaya Kota & Hidup',
+            'Kesehatan & Medis',
+            'Perangkat Belajar',
+            'Lain-lain'
+        ];
+
+        return view('campaigns.explore', compact('allCampaigns', 'categories'));
+    }
+
     public function index(): JsonResponse
     {
         $campaigns = Campaign::all();

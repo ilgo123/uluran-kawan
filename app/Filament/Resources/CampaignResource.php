@@ -70,7 +70,7 @@ class CampaignResource extends Resource
                     ->label('Pembuat')
                     ->searchable()
                     ->sortable(),
-                 Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
                     ->colors([
                         'gray' => 'pending',
@@ -106,5 +106,10 @@ class CampaignResource extends Resource
             'create' => Pages\CreateCampaign::route('/create'),
             'edit' => Pages\EditCampaign::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModel(): string
+    {
+        return \App\Models\Campaign::class;
     }
 }

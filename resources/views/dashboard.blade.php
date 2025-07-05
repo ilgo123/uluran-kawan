@@ -33,15 +33,19 @@
                 <!-- User Dropdown -->
                 <div class="relative ml-4">
                     <button id="user-menu" class="flex items-center text-sm rounded-full focus:outline-none">
-                        <span class="text-gray-600">Hi, User Test upd</span>
+                        <span class="text-gray-600">Hi, {{ auth()->user()->name }} </span>
                         <svg class="ml-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
                         </svg>
                     </button>
 
-                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                    <div id="dropdown-menu"
+                        class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil Saya</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil
+                            Saya</a>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="block px-4 py-2 text-sm text-red-700 hover:text-red-800">
@@ -62,7 +66,7 @@
         <!-- Page Heading -->
         <div class="mb-8">
             <h2 class="text-3xl font-semibold text-gray-800">Dashboard Saya</h2>
-            <p class="text-gray-600 mt-1">Selamat datang kembali, {{auth()->user()->name}}</p>
+            <p class="text-gray-600 mt-1">Selamat datang kembali, {{ auth()->user()->name }}</p>
         </div>
 
         <!-- Stats Cards -->
@@ -94,27 +98,36 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Terkumpul</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Judul</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Terkumpul</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($campaigns as $campaign)
-                        <!-- Campaign 1 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="font-medium text-gray-900">{{ $campaign->title }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-500">Rp 0</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="text-green-600 hover:text-green-900 font-medium">Edit</button>
-                            </td>
-                        </tr>
+                        @foreach ($campaigns as $campaign)
+                            <!-- Campaign 1 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">{{ $campaign->title }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">Rp 0</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <button class="text-green-600 hover:text-green-900 font-medium">Edit</button>
+                                </td>
+                            </tr>
                         @endforeach
 
                         <!-- Campaign 2
