@@ -1,4 +1,4 @@
-<?php
+// uluran-kawan/database/seeders/DatabaseSeeder.php
 
 namespace Database\Seeders;
 
