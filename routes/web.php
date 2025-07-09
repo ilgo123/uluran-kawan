@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CampaignController;
 
 // Halaman beranda
 Route::get('/', function () {
@@ -24,4 +25,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(["middleware" => "auth"], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/form-campaign', [DashboardController::class, 'create'])->name('form-campaign');
+    Route::post('/campaigns', [CampaignController::class, 'store'])->name('campaigns.store');
+    Route::get('/form-campaign', [DashboardController::class, 'create'])->name('campaigns.create');
 });

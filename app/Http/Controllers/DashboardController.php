@@ -12,4 +12,9 @@ class DashboardController extends Controller
         $campaigns = Campaign::where('user_id', auth()->user()->id)->get();
         return view('dashboard', compact('campaigns'));
     }
+
+    public function create()
+    {
+        return view('form-campaign');
+    }
 }
