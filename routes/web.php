@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\KTMUploadController;
+
 
 // Halaman beranda
 Route::get('/', function () {
@@ -30,3 +32,10 @@ Route::group(["middleware" => "auth"], function () {
 Route::get('/campaigns', [CampaignController::class, 'home'])->name('campaigns.home');
 
 Route::get('/campaigns/explore', [CampaignController::class, 'explore'])->name('campaigns.explore');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/upload-ktm', [KTMUploadController::class, 'showForm'])->name('ktm.form');
+    Route::post('/upload-ktm', [KTMUploadController::class, 'submitForm'])->name('ktm.submit');
+});

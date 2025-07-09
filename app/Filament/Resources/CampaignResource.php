@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\SelectColumn;
+
 
 class CampaignResource extends Resource
 {
@@ -52,7 +54,13 @@ class CampaignResource extends Resource
                     ->default(null),
                 Forms\Components\FileUpload::make('image_path')
                     ->image(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'rejected' => 'Rejected',
+                        'completed' => 'Completed',
+                        'active' => 'Active',
+                    ])
                     ->required(),
                 Forms\Components\Toggle::make('is_success_story')
                     ->required(),

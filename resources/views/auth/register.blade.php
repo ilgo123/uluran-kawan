@@ -9,7 +9,7 @@
 
     <h2 class="text-xl font-semibold text-gray-700 text-center mb-4">Buat Akun Baru</h2>
 
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -27,16 +27,31 @@
             <input type="password" name="password" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-green-400 outline-none">
         </div>
 
-        <div class="mb-6">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-medium mb-1">Konfirmasi Password</label>
             <input type="password" name="password_confirmation" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-green-400 outline-none">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-medium mb-1">Universitas</label>
+            <input type="text" name="university" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-green-400 outline-none">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-medium mb-1">Bio Singkat</label>
+            <textarea name="bio" rows="3" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-green-400 outline-none"></textarea>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-medium mb-1">Upload Foto KTM</label>
+            <input type="file" name="ktm" accept="image/*" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-green-400 outline-none">
         </div>
 
         <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200">
             Daftar
         </button>
 
-        <p class="text-center text-sm mt-4">Sudah punya akun? 
+        <p class="text-center text-sm mt-4">Sudah punya akun?
             <a href="{{ route('login') }}" class="text-green-600 hover:underline">Masuk sekarang</a>
         </p>
     </form>
