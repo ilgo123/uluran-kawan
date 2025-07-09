@@ -82,4 +82,30 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->role === 'admin';
     }
+
+    // Method baru untuk mengecek hak memberikan ulasan
+    public function canReview(Campaign $campaign): bool
+    {
+        // Kondisi 1: Campaign harus sudah 'completed'
+        if ($campaign->status !== 'completed') {
+            return false;
+        }
+
+        // Kondisi 2: User harus pernah berdonasi sukses ke campaign ini
+        $hasDonated = $this->donations()
+            ->where('campaign_id', $campaign->id)
+            ->where('status', 'success')
+            ->exists();
+
+        if (!$hasDonated) {
+            return false;
+        }
+
+        // Kondisi 3: User belum pernah memberikan ulasan untuk campaign ini
+        $hasReviewed = Review::where('reviewer_id', $this->id)
+            ->where('campaign_id', $campaign->id)
+            ->exists();
+
+        return !$hasReviewed;
+    }
 }

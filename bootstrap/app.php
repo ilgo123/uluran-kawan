@@ -11,8 +11,21 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Pengecualian CSRF yang sudah ada
+        $middleware->validateCsrfTokens(except: [
+            'midtrans/*',
+        ]);
+
+        // TAMBAHKAN KODE INI untuk mempercayai proxy Ngrok
+        // $middleware->trustProxies(at: [
+        //     '*', // Mempercayai semua proxy (aman untuk development dengan Ngrok)
+        // ]);
+
     })
+    ->withProviders([
+        App\Providers\Filament\AdminPanelProvider::class, // Biasanya sudah ada
+        App\Providers\MidtransServiceProvider::class, // <-- Tambahkan ini untuk Midtrans
+    ])
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
